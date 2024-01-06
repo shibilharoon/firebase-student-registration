@@ -8,16 +8,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: Text(
-          'Sudent Hub',
+          'Student Hub',
           style: GoogleFonts.aBeeZee(
               fontWeight: FontWeight.w800, color: Colors.white),
         ),
@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
           stream: provider.getStudents(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
 
             if (snapshot.hasError) {
@@ -40,6 +40,7 @@ class HomePage extends StatelessWidget {
                 snapshot.data?.docs ?? [];
 
             return ListView.separated(
+
               itemCount: studentDocs.length,
               itemBuilder: (context, index) {
                 DataModel students = studentDocs[index].data();
@@ -69,7 +70,7 @@ class HomePage extends StatelessWidget {
                           style: GoogleFonts.acme(
                               color: const Color.fromARGB(255, 90, 10, 4),
                               fontSize: 25)),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       InkWell(
@@ -84,7 +85,7 @@ class HomePage extends StatelessWidget {
                             },
                           );
                         },
-                        child: Icon(
+                        child: const Icon(
                           Icons.more_horiz,
                           color: Colors.black,
                         ),
@@ -94,7 +95,7 @@ class HomePage extends StatelessWidget {
                 );
               },
               separatorBuilder: (context, index) {
-                return Divider();
+                return const Divider();
               },
             );
           },
@@ -102,7 +103,7 @@ class HomePage extends StatelessWidget {
       }),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
-        child: Icon(Icons.add, color: Colors.white),
+        child: const Icon(Icons.add, color: Colors.white),
         onPressed: () {
           showDialog(
             context: context,

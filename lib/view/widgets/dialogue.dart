@@ -21,7 +21,7 @@ class AddingDialogue extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromARGB(133, 0, 0, 0),
+      color: const Color.fromARGB(133, 0, 0, 0),
       width: MediaQuery.of(context).size.width * 0.8,
       child: AlertDialog(
         backgroundColor: Colors.black,
@@ -33,7 +33,7 @@ class AddingDialogue extends StatelessWidget {
                   future: Future.value(Provider.of<Providers>(context).file),
                   builder: (context, snapshot) {
                     return CircleAvatar(
-                      backgroundColor: Color.fromARGB(255, 131, 130, 130),
+                      backgroundColor: const Color.fromARGB(255, 131, 130, 130),
                       radius: 40,
                       backgroundImage: snapshot.data != null
                           ? FileImage(snapshot.data!)
@@ -43,7 +43,7 @@ class AddingDialogue extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 35,
                     ),
                     TextButton(
@@ -51,12 +51,12 @@ class AddingDialogue extends StatelessWidget {
                         Provider.of<Providers>(context, listen: false)
                             .getCam(ImageSource.camera);
                       },
-                      child: Text(
+                      child: const Text(
                         'Camera',
                         style: TextStyle(color: Colors.amber),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                     TextButton(
@@ -64,7 +64,7 @@ class AddingDialogue extends StatelessWidget {
                         Provider.of<Providers>(context, listen: false)
                             .getCam(ImageSource.gallery);
                       },
-                      child: Text(
+                      child: const Text(
                         'Gallery',
                         style: TextStyle(color: Colors.amber),
                       ),
@@ -74,14 +74,14 @@ class AddingDialogue extends StatelessWidget {
                 textFields(controller: nameController, text: 'Name'),
                 textFields(controller: ageController, text: 'Age'),
                 textFields(controller: phoneController, text: 'Mobile'),
-                DropDown()
+                const DropDown()
               ],
             ),
           ),
         ),
         actions: [
           TextButton(
-            child: Text(
+            child: const Text(
               'Cancel',
               style: TextStyle(color: Colors.amber),
             ),
@@ -90,12 +90,12 @@ class AddingDialogue extends StatelessWidget {
             },
           ),
           TextButton(
-            child: Text(
+            child: const Text(
               'Add',
               style: TextStyle(color: Colors.amber),
             ),
             onPressed: () {
-              addData(context);
+              addDataS(context);
               Navigator.of(context).pop();
             },
           ),
@@ -104,7 +104,7 @@ class AddingDialogue extends StatelessWidget {
     );
   }
 
-  addData(BuildContext context) async {
+  addDataS(BuildContext context) async {
     final provider = Provider.of<FirebaseProvider>(context, listen: false);
     final pro = Provider.of<Providers>(context, listen: false);
     final name = nameController.text;
@@ -119,6 +119,5 @@ class AddingDialogue extends StatelessWidget {
         course: group,
         image: provider.downloadurl);
     provider.addStudent(data);
-    pro.file = null;
   }
 }

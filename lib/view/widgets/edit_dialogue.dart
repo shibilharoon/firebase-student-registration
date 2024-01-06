@@ -1,6 +1,5 @@
 import 'dart:io';
 
-
 import 'package:firebase_project/controller/data_provider.dart';
 import 'package:firebase_project/controller/firebase_provider.dart';
 import 'package:firebase_project/helpers/textfield.dart';
@@ -40,9 +39,11 @@ class _EditDialogueState extends State<EditDialogue> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.black,
       width: MediaQuery.of(context).size.width * 0.8,
       child: AlertDialog(
-        title: Text('Add Item'),
+        backgroundColor: Colors.black,
+        title: const Text('Add Item'),
         content: SingleChildScrollView(
           child: Consumer<Providers>(
             builder: (context, provider, child) => Column(
@@ -53,50 +54,64 @@ class _EditDialogueState extends State<EditDialogue> {
                     return CircleAvatar(
                       backgroundColor: Colors.grey,
                       radius: 40,
-                      backgroundImage:!clicked?FileImage(File(provider.file!.path)):NetworkImage(provider.file!.path)as ImageProvider,
+                      backgroundImage: !clicked
+                          ? FileImage(File(provider.file!.path))
+                          : NetworkImage(provider.file!.path) as ImageProvider,
                     );
                   },
                 ),
                 Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 35,
                     ),
                     TextButton(
                       onPressed: () {
                         provider.getCam(ImageSource.camera);
                       },
-                      child: Text('Camera'),
+                      child: const Text(
+                        'Camera',
+                        style: TextStyle(color: Colors.amber),
+                      ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                     TextButton(
                       onPressed: () {
                         provider.getCam(ImageSource.gallery);
-                        clicked=!clicked;
+                        clicked = !clicked;
                       },
-                      child: Text('Gallery'),
+                      child: const Text(
+                        'Gallery',
+                        style: TextStyle(color: Colors.amber),
+                      ),
                     ),
                   ],
                 ),
-                textFields(controller: nameController,text: 'Name'),
-                textFields(controller: ageController,text: 'Age'),
-                textFields(controller: phoneController,text: 'Mobile'),
-                DropDown()
+                textFields(controller: nameController, text: 'Name'),
+                textFields(controller: ageController, text: 'Age'),
+                textFields(controller: phoneController, text: 'Mobile'),
+                const DropDown()
               ],
             ),
           ),
         ),
         actions: [
           TextButton(
-            child: Text('cancel'),
+            child: const Text(
+              'cancel',
+              style: TextStyle(color: Colors.amber),
+            ),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           TextButton(
-            child: Text('save'),
+            child: const Text(
+              'save',
+              style: TextStyle(color: Colors.amber),
+            ),
             onPressed: () {
               update(widget.students.image);
               Navigator.of(context).pop();
@@ -107,24 +122,20 @@ class _EditDialogueState extends State<EditDialogue> {
     );
   }
 
-
-
-  void update(imageurl)async {
+  void update(imageurl) async {
     final provider = Provider.of<FirebaseProvider>(context, listen: false);
     final pro = Provider.of<Providers>(context, listen: false);
     final name = nameController.text;
     final age = ageController.text;
     final phone = phoneController.text;
     final group = pro.selectedGroups;
-   await provider.imageUpdate(imageurl,File( pro.file!.path));
+    await provider.imageUpdate(imageurl, File(pro.file!.path));
     final updated = DataModel(
         name: name,
         age: age,
         phone: phone,
         course: group,
-        image:provider.downloadurl);
+        image: provider.downloadurl);
     provider.updateStudent(widget.id, updated);
   }
 }
-
-

@@ -18,11 +18,11 @@ class EditDelete extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
-            leading: Icon(
+            leading: const Icon(
               Icons.edit,
               color: Colors.white,
             ),
-            title: Text(
+            title: const Text(
               'Edit',
               style: TextStyle(color: Colors.white),
             ),
@@ -39,11 +39,11 @@ class EditDelete extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(
+            leading: const Icon(
               Icons.delete,
               color: Colors.white,
             ),
-            title: Text(
+            title: const Text(
               'Delete',
               style: TextStyle(color: Colors.white),
             ),

@@ -17,7 +17,7 @@ class DropDown extends StatelessWidget {
                 value: grp,
                 child: Text(
                   grp,
-                  style: TextStyle(color: Colors.red),
+                  style: const TextStyle(color: Colors.red),
                 ));
           }).toList(),
           onChanged: (newValue) {

@@ -14,24 +14,12 @@ class DataModel {
 
   factory DataModel.fromJson(Map<String, dynamic> json) {
     return DataModel(
-        name: json["Name"],
-        age: json['Age'],
-        phone: json['Phone'],
-        course: json['course'],
-        image: json["image"],
-        );
-  }
-
-  DataModel copyWith(
-      {String? name, String? address, String? course, String? age}) {
-    return DataModel(
-        name: name ?? this.name,
-        age: age ?? this.age,
-        phone: phone ?? this.phone,
-        course: course ?? this.course,
-        image: image ?? this.image,
-        
-        );
+      name: json["Name"],
+      age: json['Age'],
+      phone: json['Phone'],
+      course: json['course'],
+      image: json["image"],
+    );
   }
 
   Map<String, dynamic> toJson() {
